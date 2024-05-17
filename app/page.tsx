@@ -20,7 +20,7 @@ export default async function Home() {
   const users = await getUsers();
 
   return (
-    <Container maxWidth="md" sx={{ py: 4 }}>
+    <Container maxWidth="lg" sx={{ py: 4 }}>
       <Typography variant="h3">Hypercare Users</Typography>
       <Typography variant="subtitle1">
         Connect with your healthcare colleagues and explore our community.

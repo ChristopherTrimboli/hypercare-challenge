@@ -14,6 +14,8 @@ import useResizeObserver from "../../hooks/useResizeObserver";
 import { motion, useInView } from "framer-motion";
 import type { User } from "../../types/user";
 
+const cardImageHeight = 250;
+
 interface UserCardProps {
   user: User;
 }
@@ -27,9 +29,9 @@ const UserCard = ({ user }: UserCardProps) => {
 
   const sizedImage = useMemo(() => {
     return `${user?.avatar.split("?")[0]}?size=${Math.round(
-      dimensions?.height || 50
-    )}x${Math.round(dimensions?.width || 50)}&set=set1`;
-  }, [dimensions?.height, dimensions?.width, user?.avatar]);
+      dimensions?.width || cardImageHeight
+    )}x${cardImageHeight}&set=set1`;
+  }, [dimensions?.width, user?.avatar]);
 
   return (
     <motion.div
@@ -46,22 +48,47 @@ const UserCard = ({ user }: UserCardProps) => {
         {isInView && (
           <Fade in>
             <CardMedia
-              sx={{ height: 150 }}
+              sx={{ height: cardImageHeight }}
               image={sizedImage}
               title={user?.username}
             />
           </Fade>
         )}
-        <CardContent>
+        <CardContent
+          sx={{
+            minHeight: "9rem",
+          }}
+        >
           <Typography gutterBottom variant="h5" component="div">
             {user?.username}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              display: "-webkit-box",
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: "vertical",
+              whiteSpace: "normal",
+              maxHeight: "4.5rem",
+              lineHeight: "1.5",
+            }}
+          >
             {user?.description}
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">View More</Button>
+          <Button
+            size="small"
+            fullWidth
+            sx={{
+              textTransform: "none",
+            }}
+          >
+            View More
+          </Button>
         </CardActions>
       </Card>
     </motion.div>

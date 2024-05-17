@@ -10,7 +10,7 @@ const UsersList = ({ users }: UsersListProps) => {
   return (
     <Grid container spacing={2}>
       {users?.map((user) => (
-        <Grid key={user.id} xs={12} sm={6} md={4}>
+        <Grid key={user.id} xs={12} sm={6} md={4} lg={3}>
           <UserCard user={user} />
         </Grid>
       ))}
