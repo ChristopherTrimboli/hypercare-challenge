@@ -1,14 +1,14 @@
 import { Box, Skeleton } from "@mui/material";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
+import Grid from "@mui/material/Unstable_Grid2";
 
 const skeletonCount = 24;
 
 const UserListSkeleton = () => {
   return (
     <>
-      <Grid2 container spacing={2}>
+      <Grid container spacing={2}>
         {Array.from({ length: skeletonCount }).map((_, index) => (
-          <Grid2 key={index} xs={12} sm={6} md={4} lg={3}>
+          <Grid key={index} xs={12} sm={6} md={4} lg={3}>
             <Box
               sx={{
                 bgcolor: "background.paper",
@@ -45,9 +45,9 @@ const UserListSkeleton = () => {
                 <Skeleton variant="text" width={"100%"} height={20} />
               </Box>
             </Box>
-          </Grid2>
+          </Grid>
         ))}
-      </Grid2>
+      </Grid>
     </>
   );
 };

@@ -9,7 +9,7 @@ import {
   useState,
 } from "react";
 import type { User } from "../../types/user";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import Grid from "@mui/material/Unstable_Grid2";
 import UserCard from "./UserCard";
 import UsersListSkeleton from "./UsersListSkeleton";
 
