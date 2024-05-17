@@ -1,6 +1,8 @@
 import { Container, Typography, Divider } from "@mui/material";
 import type { User } from "../types/user";
 import ClientPage from "./ClientPage";
+import UserListSkeleton from "@/components/users/UsersListSkeleton";
+import { Suspense } from "react";
 
 async function getUsers() {
   const res = await fetch(
@@ -15,9 +17,13 @@ async function getUsers() {
   return json.data.users as User[];
 }
 
-export default async function Page() {
+const PageContent = async () => {
   const users = await getUsers();
 
+  return <ClientPage users={users} />;
+};
+
+export default async function Page() {
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <Typography variant="h3">Hypercare Users</Typography>
@@ -27,7 +33,9 @@ export default async function Page() {
 
       <Divider sx={{ my: 2 }} />
 
-      <ClientPage users={users} />
+      <Suspense fallback={<UserListSkeleton />}>
+        <PageContent />
+      </Suspense>
     </Container>
   );
 }

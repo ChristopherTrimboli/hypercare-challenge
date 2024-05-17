@@ -1,9 +1,17 @@
 "use client";
 
-import { memo, useCallback, useEffect, useRef, useState } from "react";
+import {
+  Suspense,
+  memo,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import type { User } from "../../types/user";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import UserCard from "./UserCard";
+import UsersListSkeleton from "./UsersListSkeleton";
 
 interface UsersListProps {
   users: User[];
@@ -55,13 +63,15 @@ const UsersList = memo(({ users, onViewUser }: UsersListProps) => {
   }, [loadNextChunk]);
 
   return (
-    <Grid container spacing={2}>
-      {chunkedUsers?.map((user, index) => (
-        <Grid key={`${user.id}-${index}`} xs={12} sm={6} md={4} lg={3}>
-          <UserCard user={user} onViewUser={onViewUser} />
-        </Grid>
-      ))}
-    </Grid>
+    <Suspense fallback={<UsersListSkeleton />}>
+      <Grid container spacing={2}>
+        {chunkedUsers?.map((user, index) => (
+          <Grid key={`${user.id}-${index}`} xs={12} sm={6} md={4} lg={3}>
+            <UserCard user={user} onViewUser={onViewUser} />
+          </Grid>
+        ))}
+      </Grid>
+    </Suspense>
   );
 });
 
