@@ -1,16 +1,18 @@
 "use client";
 
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import {
   Button,
   Card,
   CardActions,
   CardContent,
   CardMedia,
+  Fade,
   Typography,
 } from "@mui/material";
+import useResizeObserver from "../../hooks/useResizeObserver";
 import { motion, useInView } from "framer-motion";
-import type { User } from "../../../types/user";
+import type { User } from "../../types/user";
 
 interface UserCardProps {
   user: User;
@@ -19,6 +21,15 @@ interface UserCardProps {
 const UserCard = ({ user }: UserCardProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
+  const dimensions = useResizeObserver(ref, {
+    throttleTimeout: 5000,
+  });
+
+  const sizedImage = useMemo(() => {
+    return `${user?.avatar.split("?")[0]}?size=${Math.round(
+      dimensions?.height || 50
+    )}x${Math.round(dimensions?.width || 50)}&set=set1`;
+  }, [dimensions?.height, dimensions?.width, user?.avatar]);
 
   return (
     <motion.div
@@ -33,11 +44,13 @@ const UserCard = ({ user }: UserCardProps) => {
     >
       <Card>
         {isInView && (
-          <CardMedia
-            sx={{ height: 140 }}
-            image={user?.avatar}
-            title={user?.username}
-          />
+          <Fade in>
+            <CardMedia
+              sx={{ height: 150 }}
+              image={sizedImage}
+              title={user?.username}
+            />
+          </Fade>
         )}
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">

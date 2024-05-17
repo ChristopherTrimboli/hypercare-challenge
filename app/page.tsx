@@ -1,7 +1,7 @@
 import { Container, Divider, Typography } from "@mui/material";
 import type { User } from "../types/user";
 import { Suspense } from "react";
-import UsersList from "./components/users/UsersList";
+import UsersList from "../components/users/UsersList";
 
 async function getUsers() {
   const res = await fetch(
