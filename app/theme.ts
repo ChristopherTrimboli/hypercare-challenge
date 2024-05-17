@@ -7,6 +7,7 @@ const nunitoSans = Nunito_Sans({
   weight: ["300", "400", "500", "700"],
   subsets: ["latin"],
   display: "swap",
+  fallback: ["sans-serif"],
 });
 
 const theme = createTheme({
