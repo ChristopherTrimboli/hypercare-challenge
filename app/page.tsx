@@ -1,7 +1,6 @@
-import { Container, Divider, Typography } from "@mui/material";
+import { Container, Typography, Divider } from "@mui/material";
 import type { User } from "../types/user";
-import { Suspense } from "react";
-import UsersList from "../components/users/UsersList";
+import ClientPage from "./ClientPage";
 
 async function getUsers() {
   const res = await fetch(
@@ -16,7 +15,7 @@ async function getUsers() {
   return json.data.users as User[];
 }
 
-export default async function Home() {
+export default async function Page() {
   const users = await getUsers();
 
   return (
@@ -25,11 +24,10 @@ export default async function Home() {
       <Typography variant="subtitle1">
         Connect with your healthcare colleagues and explore our community.
       </Typography>
+
       <Divider sx={{ my: 2 }} />
 
-      <Suspense fallback={<div>Loading...</div>}>
-        <UsersList users={users} />
-      </Suspense>
+      <ClientPage users={users} />
     </Container>
   );
 }

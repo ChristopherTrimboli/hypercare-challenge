@@ -18,9 +18,10 @@ const cardImageHeight = 250;
 
 interface UserCardProps {
   user: User;
+  onViewUser: (userId: string) => void;
 }
 
-const UserCard = ({ user }: UserCardProps) => {
+const UserCard = ({ user, onViewUser }: UserCardProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
   const dimensions = useResizeObserver(ref, {
@@ -60,7 +61,7 @@ const UserCard = ({ user }: UserCardProps) => {
           }}
         >
           <Typography gutterBottom variant="h5" component="div">
-            {user?.username}
+            {user?.firstname} {user?.lastname}
           </Typography>
           <Typography
             variant="body2"
@@ -81,6 +82,7 @@ const UserCard = ({ user }: UserCardProps) => {
         </CardContent>
         <CardActions>
           <Button
+            onClick={() => onViewUser(user?.id)}
             size="small"
             fullWidth
             sx={{
