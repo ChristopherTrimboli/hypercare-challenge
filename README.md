@@ -11,3 +11,7 @@ Hypercare Frontend Developer Coding Challenge
 ### Run Jest Tests
 
 `npm run test`
+
+### Run Cypress E2E
+
+`npm run cypress`

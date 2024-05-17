@@ -45,6 +45,7 @@ const UserCard = ({ user, onViewUser }: UserCardProps) => {
         hidden: { opacity: 0, scale: 0.9 },
       }}
       data-testid="user-card"
+      className="user-card"
     >
       <Card>
         {isInView && (
