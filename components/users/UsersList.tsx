@@ -11,7 +11,6 @@ import {
 import type { User } from "../../types/user";
 import Grid from "@mui/material/Unstable_Grid2";
 import UserCard from "./UserCard";
-import UsersListSkeleton from "./UsersListSkeleton";
 
 interface UsersListProps {
   users: User[];
@@ -63,15 +62,13 @@ const UsersList = memo(({ users, onViewUser }: UsersListProps) => {
   }, [loadNextChunk]);
 
   return (
-    <Suspense fallback={<UsersListSkeleton />}>
-      <Grid container spacing={2}>
-        {chunkedUsers?.map((user, index) => (
-          <Grid key={`${user.id}-${index}`} xs={12} sm={6} md={4} lg={3}>
-            <UserCard user={user} onViewUser={onViewUser} />
-          </Grid>
-        ))}
-      </Grid>
-    </Suspense>
+    <Grid container spacing={2}>
+      {chunkedUsers?.map((user, index) => (
+        <Grid key={`${user.id}-${index}`} xs={12} sm={6} md={4} lg={3}>
+          <UserCard user={user} onViewUser={onViewUser} />
+        </Grid>
+      ))}
+    </Grid>
   );
 });
 

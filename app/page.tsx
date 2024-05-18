@@ -12,7 +12,9 @@ const PageContent = async () => {
 export default async function Page() {
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Typography variant="h3" className="header">Hypercare Users</Typography>
+      <Typography variant="h3" className="header">
+        Hypercare Users
+      </Typography>
       <Typography variant="subtitle1">
         Connect with your healthcare colleagues and explore our community.
       </Typography>
