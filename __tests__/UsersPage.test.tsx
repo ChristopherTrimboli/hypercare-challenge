@@ -99,7 +99,7 @@ describe("UsersClientPage", () => {
 
     viewMoreButton[0].click();
 
-    const userInfoModal = screen.queryAllByText("Thom Alsobrook");
+    const userInfoModal = screen.queryAllByText("Engineer");
 
     expect(userInfoModal).toBeDefined();
   });
